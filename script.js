@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Hide preloader after animation
     setTimeout(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'instant' });
         gsap.to(preloader, {
             opacity: 0,
             duration: 0.5,
@@ -20,12 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, 2000);
-    
-    
-    
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
-    
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             navbar.classList.add('scrolled');
@@ -55,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             
@@ -72,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function animateHero() {
         const titleWords = document.querySelectorAll('.title-word');
         const heroSubtitle = document.querySelector('.hero-subtitle');
+        const heroSubtitle2 = document.querySelector('.hero-subtitle2');
         const heroScroll = document.querySelector('.hero-scroll');
         
         gsap.to(titleWords, {
@@ -83,6 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         gsap.to(heroSubtitle, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+
+        gsap.to(heroSubtitle2, {
             y: 0,
             opacity: 1,
             duration: 1,
@@ -101,12 +105,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Projects data
     const projectsData = [
         {
-            title: "Prueba",
-            description: "hola",
-            tags: ["React", "Node.js", "MongoDB", "Stripe"],
-            image: "https://via.placeholder.com/600x400?text=E-commerce",
-            downloadUrl: "https://tu-sitio.com/descarga/proyecto1.zip", // Enlace real aquí
-            sourceCodeUrl: "https://github.com/tu-usuario/tu-repositorio" // Enlace real aquí
+            title: "Image converter",
+            description: "Tired of constantly searching Google to change your photo formats? Well, this script brings you the solution! Simply run the program, select an image, choose the format you want to convert it to, and voila! You have your photo in a new format.",
+            tags: ["Python"],
+            image: "img/image_converter.png",
+            downloadUrl: "https://www.mediafire.com/file/2jguil4igxckgn3/convertor.exe/file",
+            sourceCodeUrl: "https://www.mediafire.com/file/4l5vz103wln2wxu/convertor.py/file"
+        },
+        {
+            title: "QR Code Generator",
+            description: "This is another one of the handy practical programs that you never will regret having in your arsenal. With this program, you can easily generate QR codes for your favorite websites, social media profiles, or even your email address. It's a simple yet effective way to share information with others.",
+            tags: ["Python"],
+            image: "img/qr_code_generator.png",
+            downloadUrl: "https://www.mediafire.com/file/oek2ckujrss6s6b/qr_code_generate.exe/file",
+            sourceCodeUrl: "https://www.mediafire.com/file/55npf3bkqtku1w1/qr_code_generate.py/file"
+        },
+        {
+            title: "Auto Clicker",
+            description: "This is a simple auto clicker that can be used to automate repetitive tasks on your computer. It simulates mouse clicks at a specified interval, making it useful for tasks like gaming or testing.",
+            tags: ["Python"],
+            image: "img/auto_clicker.png",
+            downloadUrl: "https://www.mediafire.com/file/hq8tlbozmodc1m8/auto_clicker.exe/file",
+            sourceCodeUrl: "https://www.mediafire.com/file/tkol6zzfgkopzc0/auto_clicker.py/file"
         },
     ];
     
@@ -154,40 +174,13 @@ const projectsGrid = document.querySelector('.projects-grid');
         gsap.from(projectCard, {
             scrollTrigger: {
                 trigger: projectCard,
-                start: "top 80%",
+                start: "top 50%",
                 toggleActions: "play none none none"
             },
             y: 50,
             opacity: 0,
             duration: 0.8,
             delay: index * 0.1
-        });
-    });
-    
-    // Render skills
-    const skillsContainer = document.querySelector('.skills-container');
-    
-    skillsData.forEach((skill, index) => {
-        const skillItem = document.createElement('div');
-        skillItem.className = 'skill-item';
-        skillItem.innerHTML = `
-            <i class="${skill.icon} skill-icon"></i>
-            <span class="skill-name">${skill.name}</span>
-        `;
-        
-        skillsContainer.appendChild(skillItem);
-        
-        // Animate skill items with ScrollTrigger
-        gsap.from(skillItem, {
-            scrollTrigger: {
-                trigger: skillItem,
-                start: "top 80%",
-                toggleActions: "play none none none"
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            delay: index * 0.05
         });
     });
     
@@ -230,42 +223,6 @@ const projectsGrid = document.querySelector('.projects-grid');
                 ctx.fill();
             }
         }
-        
-        // Create particles
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-        
-        // Animation loop
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                // Connect particles
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(108, 92, 231, ${1 - distance / 100})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            
-            requestAnimationFrame(animate);
-        }
-        
-        animate();
-        
         // Resize handler
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
@@ -283,12 +240,12 @@ const projectsGrid = document.querySelector('.projects-grid');
         gsap.from(section, {
             scrollTrigger: {
                 trigger: section,
-                start: "top 80%",
+                start: "top 60%",
                 toggleActions: "play none none none"
             },
             opacity: 0,
             y: 50,
-            duration: 1
+            duration: 1.5
         });
     });
     
@@ -306,33 +263,15 @@ const projectsGrid = document.querySelector('.projects-grid');
         
         el.addEventListener('mouseleave', () => {
             gsap.to(el, {
-                y: 0,
+                y: 5,
                 duration: 0.3,
                 ease: 'power1.out'
             });
         });
     });
-    
-    // Form submission
-    const contactForm = document.querySelector('.contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', data);
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
-        });
-    }
 });
+
+
 
 const birthDate = new Date(2010, 3, 3);
 
@@ -352,9 +291,7 @@ function formatAge(age) {
 function updateAgeDisplay() {
     const ageValueElement = document.querySelector('.age-value');
     const age = calculateExactAge();
-    ageValueElement.innerHTML = `Hi, my real name is <b>Alex Castella</b>. I'm a <b>${formatAge(age)}</b> years old programming enthusiast who loves creating and solving problems through code. Ever since I discovered programming, I've been passionate about building innovative projects, exploring new technologies, and continuously learning to improve my skills.`;
-    
-    // Actualizar cada 100ms para mayor fluidez
+    ageValueElement.innerHTML = `Hi, my real name is <b>Alex Castella</b>. I'm a <b>${formatAge(age)}</b>-year-old programming enthusiast who loves creating and solving problems through code. Ever since I discovered programming, I've been passionate about building innovative projects, exploring new technologies, and continuously learning to improve my skills.`;
     requestAnimationFrame(updateAgeDisplay);
 }
 
@@ -403,15 +340,82 @@ document.querySelectorAll('.skill-badge').forEach(badge => {
     });
 });
 
-// Animación para el proyecto especial
-gsap.to(".project-card-special", {
-    scrollTrigger: {
-        trigger: ".project-card-special",
-        start: "top 80%",
-        toggleActions: "play none none none"
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: "power2.out"
-});
+// Configuración de partículas
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('particles-bg');
+    const ctx = canvas.getContext('2d');
+    
+    // Ajustar tamaño del canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Crear partículas
+    const particles = [];
+    const particleCount = window.innerWidth < 768 ? 30 : 80;
+    
+    class Particle {
+        constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `hsl(${Math.random() * 60 + 200}, 70%, 60%)`;
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+  
+    // Inicializar partículas
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+  
+    // Animación
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        // Conectar partículas cercanas
+        for (let j = i; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(108, 92, 231, ${1 - distance / 100})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+  });
