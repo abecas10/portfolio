@@ -167,7 +167,7 @@ const projectsGrid = document.querySelector('.projects-grid');
                 <!-- Añadimos los botones aquí -->
                 <div class="project-buttons">
                     <a href="${project.downloadUrl || '#'}" class="btn btn-download" ${project.downloadUrl ? 'download' : ''}>
-                        <i class="fas fa-download"></i> Download
+                        <i class="fas fa-download"></i> Try it
                     </a>
                     <a href="${project.sourceCodeUrl || '#'}" class="btn btn-source" target="_blank">
                         <i class="fab fa-github"></i> Source Code
