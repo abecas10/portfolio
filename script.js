@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
             description:"This is a simple yet powerful Finance Tracker. You can monitor all your income and expenses, with all data automatically saved to your browser's LocalStorage. This means your financial records remain intact even if you close and reopen the app - everything will be right where you left it.",
             tags: ["HTML", "CSS", "JavaScript"],
             image: "img/finance_tracker.png",
-            downloadUrl: "#finance_tracker_simple.html",
-            sourceCodeUrl: "hffbul"
+            downloadUrl: "https://abecas10.github.io/financialtracker/",
+            sourceCodeUrl: "https://github.com/abecas10/financialtracker"
         },
     ];
     
