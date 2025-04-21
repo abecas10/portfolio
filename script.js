@@ -136,6 +136,14 @@ document.addEventListener('DOMContentLoaded', function() {
             downloadUrl: "https://abecas10.github.io/financialtracker/",
             sourceCodeUrl: "https://github.com/abecas10/financialtracker"
         },
+        {
+            title: "Website for themed dinners",
+            description: "The idea behind this website was to partner with restaurants so you could organize dinners for groups of, say, 10 people with a common interest, bringing them together at a restaurant for a dinner. This is a prototype of a frontend website.",
+            tags: ["HTML", "CSS", "JavaScript"],
+            image: "img/cenastematicas.png",
+            downloadUrl: "https://abecas10.github.io/cenastematicas/",
+            sourceCodeUrl: "https://github.com/abecas10/cenastematicas"
+        },
     ];
     
     // Skills data
