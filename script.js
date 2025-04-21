@@ -128,6 +128,14 @@ document.addEventListener('DOMContentLoaded', function() {
             downloadUrl: "https://www.mediafire.com/file/hq8tlbozmodc1m8/auto_clicker.exe/file",
             sourceCodeUrl: "https://www.mediafire.com/file/tkol6zzfgkopzc0/auto_clicker.py/file"
         },
+        {
+            title: "Finance Tracker",
+            description:"This is a simple yet powerful Finance Tracker. You can monitor all your income and expenses, with all data automatically saved to your browser's LocalStorage. This means your financial records remain intact even if you close and reopen the app - everything will be right where you left it.",
+            tags: ["HTML"], ["CSS"], ["JavaScript"],
+            image: "img/finance_tracker.png",
+            downloadUrl: "#finance_tracker_simple.html",
+            sourceCodeUrl: ""
+        },
     ];
     
     // Skills data
