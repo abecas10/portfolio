@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+    });
     const titleWord3 = document.querySelectorAll('.title-word-3');
     gsap.to(titleWord3, {
         y: 0,
@@ -8,78 +11,96 @@ document.addEventListener('DOMContentLoaded', function() {
         stagger: 0.1,
         ease: 'power3.out'
     });
-    // Preloader animation - Versión corregida
-    if (window.innerWidth < 992 && window.innerWidth > 768) {
-        const preloader = document.querySelector('.preloader');
-        preloader.style.display = 'none';
-        animateHero();
-    }else {
-        const preloader = document.querySelector('.preloader');
-const preloaderText = document.querySelectorAll('.preloader-text-word');
-const heroTitleAlbecas = document.querySelector('.title-word-3');
+// Preloader animation - Versión corregida
+if (window.innerWidth < 992 && window.innerWidth > 768) {
+    const preloader = document.querySelector('.preloader');
+    preloader.style.display = 'none';
+    animateHero();
+} else {
+    const preloader = document.querySelector('.preloader');
+    const preloaderText = document.querySelectorAll('.preloader-text-word');
+    const heroTitleAlbecas = document.querySelector('.title-word-3');
 
-// Animación inicial: letras apareciendo una por una
-preloaderText.forEach((word, index) => {
-    gsap.from(word, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
-        delay: index * 0.1,
-        ease: "power2.out"
-    });
+    // Bloquear scroll inmediatamente
+    document.documentElement.style.overflow = 'hidden';
     window.scrollTo(0, 0);
-});
+
+    // Animación inicial: letras apareciendo una por una
+    preloaderText.forEach((word, index) => {
+        gsap.from(word, {
+            opacity: 0,
+            y: 20,
+            duration: 0.3,
+            delay: index * 0.1,
+            ease: "power2.out"
+        });
+    });
 
 setTimeout(() => {
-    window.scrollTo(0, 0);
-    // Calcular posición relativa al viewport
-    const targetRect = heroTitleAlbecas.getBoundingClientRect();
-    const targetX = targetRect.left + window.scrollX;
-    const targetY = targetRect.top + window.scrollY;
-    
-    // Ajustar para móvil
-    const isMobile = window.innerWidth < 768;
+    // Forzar reset de scroll y layout
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.documentElement.getBoundingClientRect(); // Forzar reflow
 
-    preloaderText.forEach((letter, index) => {
-        const letterRect = letter.getBoundingClientRect();
-        const letterX = letterRect.left + window.scrollX;
-        const letterY = letterRect.top + window.scrollY;
+    requestAnimationFrame(() => {
+        // Obtener posición absoluta del título objetivo
+        const targetRect = heroTitleAlbecas.getBoundingClientRect();
+        const targetX = targetRect.left + window.scrollX;
+        const targetY = targetRect.top + window.scrollY;
         
-        // Calcular offsets dentro del forEach para tener acceso a index
-        const xOffset = isMobile ? index * 24 : index * 55;
-        const yOffset = isMobile ? 49 : 51;
+        // Calcular posición base (primera letra)
+        const firstLetterRect = preloaderText[0].getBoundingClientRect();
+        const baseX = firstLetterRect.left + window.scrollX;
+        const baseY = firstLetterRect.top + window.scrollY;
 
-        gsap.to(letter, {
-            x: targetX - letterX + xOffset,
-            y: targetY - letterY + yOffset,
-            color: "#a200ff",
-            duration: 1,
-            ease: "power2.inOut",
-            delay: index * 0.05,
-            onComplete: () => {
-                if (index === preloaderText.length - 1) {
-                    gsap.to(preloader, {
-                        opacity: 0,
-                        duration: 0.5,
-                        onComplete: () => {
-                            preloader.style.display = 'none';
-                            gsap.to(heroTitleAlbecas, { 
-                                opacity: 1, 
-                                duration: 0 
-                            });
-                            animateHero();
-                        }
-                    });
-                    gsap.to(preloaderText, {
-                        opacity: 1,
-                        duration: 0,
-                    });
+        // Determinar si es móvil
+        const isMobile = window.innerWidth < 768;
+        
+        // Ajustes diferentes para móvil y desktop
+        const xAdjustment = isMobile ? 24 : 55;
+
+        preloaderText.forEach((letter, index) => {
+            const letterRect = letter.getBoundingClientRect();
+            const letterX = letterRect.left + window.scrollX;
+            const letterY = letterRect.top + window.scrollY;
+            
+            // Calcular posición relativa al grupo de letras
+            const relativeX = letterX - baseX;
+            const relativeY = letterY - baseY;
+
+            gsap.to(letter, {
+                x: targetX - baseX + relativeX - (index * xAdjustment), // Ajuste diferente para móvil
+                y: targetY - baseY + relativeY,
+                color: "#a200ff",
+                duration: 1,
+                ease: "power2.inOut",
+                delay: index * 0.05,
+                onComplete: () => {
+                    if (index === preloaderText.length - 1) {
+                        gsap.to(preloader, {
+                            opacity: 0,
+                            duration: 0.5,
+                            onComplete: () => {
+                                preloader.style.display = 'none';
+                                document.documentElement.style.overflow = '';
+                                gsap.to(heroTitleAlbecas, { 
+                                    opacity: 1, 
+                                    duration: 0 
+                                });
+                                animateHero();
+                            }
+                        });
+                        gsap.to(preloaderText, {
+                            opacity: 1,
+                            duration: 0,
+                        });
+                    }
                 }
-            }
+            });
         });
     });
 }, 2000);
-    }
+}
+
 
     
     // Navbar scroll effect
