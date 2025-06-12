@@ -390,7 +390,7 @@ function formatAge(age) {
 function updateAgeDisplay() {
     const ageValueElement = document.querySelector('.age-value');
     const age = calculateExactAge();
-    ageValueElement.innerHTML = `Hi, my real name is <b>Alex Castella</b>. I'm a <b>${formatAge(age)}</b>-year-old programming enthusiast who loves creating and solving problems through code. Ever since I discovered programming, I've been passionate about building innovative projects, exploring new technologies, and continuously learning to improve my skills.`;
+    ageValueElement.innerHTML = `Hi, my name is <b>Alex Castella</b> and I'm <b>${formatAge(age)}</b> years old. I specialize as a full-stack developer with a focus on delivering effective software solutions. I tackle comprehensive development, encompassing dynamic web applications—from interactive user experiences to powerful server-side logic—and the construction of versatile applications for varied requirements. My process involves systematically translating complex challenges into precise, functional code. I consistently expand my technical knowledge and integrate new tools; this adaptability enables me to confidently address a wide range of development tasks and consistently deliver well-engineered outcomes.`;
     requestAnimationFrame(updateAgeDisplay);
 }
 
