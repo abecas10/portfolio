@@ -227,6 +227,14 @@ setTimeout(() => {
             downloadUrl: "https://abecas10.github.io/cenastematicas/",
             sourceCodeUrl: "https://github.com/abecas10/cenastematicas"
         },
+        {
+            title: "Study Tracker",
+            description: "This is a simple study tracker that can be used to keep track of your time spended in studying. It automatically saves your data to your browser's LocalStorage, so you can access it even after closing and reopening the app.",
+            tags: ["HTML", "CSS", "JavaScript"],
+            image: "img/study_tracker.png",
+            downloadUrl: "https://abecas10.github.io/studytracker/",
+            sourceCodeUrl: "https://github.com/abecas10/studytracker"
+        }
     ];
     
     // Skills data
