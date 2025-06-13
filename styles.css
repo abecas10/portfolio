@@ -369,6 +369,51 @@ section {
     letter-spacing: 3px;
 }
 
+/* Advertisement Section */
+.advertisement {
+    color: var(--primary-color);
+    text-align: center;
+    padding: 5rem 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.advertisement-content {
+    max-width: 800px;
+}
+
+.advertisement-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    font-family: 'Space Mono', monospace;
+    color: var(--light-color);
+}
+
+.advertisement-content p {
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+}
+
+.advertisement-content .btn-consult {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    padding: 1.5rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.advertisement-content .btn-consult:hover {
+    background-color: #882393;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
 /* Projects Section */
 .projects-grid {
     display: flex;
@@ -907,6 +952,10 @@ section {
     .section-title {
         font-size: 5rem;
     }
+
+    .advertisement-content h2 {
+        font-size: 2.8rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -968,6 +1017,14 @@ section {
     .projects-grid {
         grid-template-columns: 1fr;
     }
+
+    .advertisement-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .advertisement-content p {
+        font-size: 1.6rem;
+    }
 }
 
 .project-buttons {
@@ -1025,6 +1082,13 @@ section {
     .btn {
         width: 100%;
         text-align: center;
+    }
+    .advertisement-content h2 {
+        font-size: 1.8rem;
+    }
+    .advertisement-content .btn-consult {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.4rem;
     }
 }
 
