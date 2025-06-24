@@ -188,6 +188,14 @@ setTimeout(() => {
     // Projects data
     const projectsData = [
         {
+            title: "FolioX",
+            description: "My very own business",
+            tags: ["HTML", "CSS", "JavaScript", "React"],
+            image: "img/foliox.png",
+            downloadUrl: "https://abecas10.github.io/foliox/",
+            sourceCodeUrl: "https://abecas10.github.io/foliox/"
+        },
+        {
             title: "Image converter",
             description: "Tired of constantly searching Google to change your photo formats? Well, this script brings you the solution! Simply run the program, select an image, choose the format you want to convert it to, and voila! You have your photo in a new format.",
             tags: ["Python"],
